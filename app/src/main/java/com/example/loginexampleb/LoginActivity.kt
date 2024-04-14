@@ -76,7 +76,7 @@ fun LoginScreen(name: String, modifier: Modifier = Modifier) {
         .background(color = Color.White), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center)
     {
 
-        Image(painter = painterResource(id = R.drawable.capitech), contentDescription ="Logo Image",
+        Image(painter = painterResource(id = R.drawable.CaptainsLogo), contentDescription ="Logo Image",
             modifier= modifier
                 .size(100.dp)
                 .background(color = Color.White, shape = CircleShape)
