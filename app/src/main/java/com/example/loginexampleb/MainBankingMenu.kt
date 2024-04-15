@@ -76,7 +76,7 @@ fun MainMenuLazyGridScreen(modifier:Modifier = Modifier, bankingItems:List<BankI
         .padding(5.dp)
         .fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
 
-        Image(painter = painterResource(id = R.drawable.CaptainsLogo), contentDescription ="Bank logo" )
+        Image(painter = painterResource(id = R.drawable.captainslogo), contentDescription ="Bank logo" )
         Spacer(modifier = Modifier.height(60.dp))
         LazyVerticalGrid(columns = GridCells.Fixed(2)) {
             itemsIndexed(bankingItems){

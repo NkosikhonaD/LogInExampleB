@@ -54,7 +54,19 @@ class LoginActivity : ComponentActivity() {
             }
         }
     }
-   //
+
+    override fun onStart() {
+        super.onStart()
+        // any valid kotlin code
+        println("Login Activity is on start")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        println("Login Activtity is on resume")
+    }
+
+
 
 }
 
@@ -76,7 +88,7 @@ fun LoginScreen(name: String, modifier: Modifier = Modifier) {
         .background(color = Color.White), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center)
     {
 
-        Image(painter = painterResource(id = R.drawable.CaptainsLogo), contentDescription ="Logo Image",
+        Image(painter = painterResource(id = R.drawable.captainslogo), contentDescription ="Logo Image",
             modifier= modifier
                 .size(100.dp)
                 .background(color = Color.White, shape = CircleShape)
