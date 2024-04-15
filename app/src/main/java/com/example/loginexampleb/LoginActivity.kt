@@ -57,16 +57,26 @@ class LoginActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
-        // any valid kotlin code
-        println("Login Activity is on start")
+        Log.i("Login Activity"," ** !!START")
+
     }
 
     override fun onResume() {
         super.onResume()
-        println("Login Activtity is on resume")
+        Log.i("Login Activity","** !! RESUME")
+
     }
 
+    override fun onPause() {
+        super.onPause()
+        Log.i("Login Activity","** !! ON PAUSE")
+    }
 
+    override fun onStop() {
+        super.onStop()
+        Log.i("Login Activity","** !! ON STOP")
+
+    }
 
 }
 

@@ -1,3 +1,3 @@
-package com.example.loginexampleb
+package com.example.loginexampleb.model
 
 data class BankItem(val image:Int,val name:String)
