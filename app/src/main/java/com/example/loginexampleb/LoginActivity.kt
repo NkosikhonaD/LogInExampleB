@@ -111,6 +111,8 @@ fun LoginScreen(name: String, modifier: Modifier = Modifier) {
         OutlinedTextField(value = userName, onValueChange ={userName=it},modifier= modifier
             .fillMaxWidth(0.75f)
             .padding(5.dp)
+            ,
+            maxLines = 1
         ,label={Text("User name")})
 
         OutlinedTextField(value = password,
@@ -119,6 +121,7 @@ fun LoginScreen(name: String, modifier: Modifier = Modifier) {
             .fillMaxWidth(0.75f)
             .padding(5.dp)
             ,
+            maxLines = 1,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
             ,
             label={Text("Password")})
