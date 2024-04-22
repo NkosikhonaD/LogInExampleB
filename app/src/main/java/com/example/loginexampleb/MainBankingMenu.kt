@@ -66,15 +66,15 @@ class MainBankingMenu : ComponentActivity() {
 
                 )
                 {
-                    val bankItem1 = BankItem(name="Transfare", image = R.drawable.transact_24)
-                    val bankItem2 = BankItem(name="Save", image = R.drawable.savings_24)
-                    val bankItem3 = BankItem(name="Cards", image = R.drawable.cards_24)
-                    val bankItem4 = BankItem(name="Fraud", image = R.drawable.reportfraud_24)
-                    val bankItem5 = BankItem(name="Contact", image = R.drawable.email_24)
-                    val bankItem6= BankItem(name="Petrol card", image = R.drawable.petrolcard_24)
+                   // val bankItem1 = BankItem(name="Transfare", image = R.drawable.transact_24)
+                   // val bankItem2 = BankItem(name="Save", image = R.drawable.savings_24)
+                   // val bankItem3 = BankItem(name="Cards", image = R.drawable.cards_24)
+                  //  val bankItem4 = BankItem(name="Fraud", image = R.drawable.reportfraud_24)
+                  //  val bankItem5 = BankItem(name="Contact", image = R.drawable.email_24)
+                  //  val bankItem6= BankItem(name="Petrol card", image = R.drawable.petrolcard_24)
 
-                    var bankItemsList by remember { mutableStateOf(listOf<BankItem>(bankItem1,bankItem2,bankItem3,bankItem4,bankItem5,bankItem6))
-                    }
+                  //  var bankItemsList by remember { mutableStateOf(listOf<BankItem>(bankItem1,bankItem2,bankItem3,bankItem4,bankItem5,bankItem6))
+                   // }
                     //var bankingItems = bankItemviewModel.bankItemList
                     //MainMenuLazyGridScreen(bankingItems = bankItemsList)
                     BankMainScreen()

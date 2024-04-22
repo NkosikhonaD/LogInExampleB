@@ -14,14 +14,9 @@ import kotlinx.coroutines.flow.update
 
 class BankItemViewModel(): ViewModel ()
 {
-    val bankItem1 = BankItem(name="Transfare", image = R.drawable.transact_24)
 
     private val _bankItemList= MutableStateFlow<List<BankItem>>(addBankItemsInit())
     val bankItemList: StateFlow<List<BankItem>> get() = _bankItemList
-
-    //= listO(bankItem1)
-    //private val _uiState = MutableStateFlow(BankUiState())
-    //val uiState: StateFlow<BankUiState> = _uiState.asStateFlow()
 
     fun resetBankItems()
     {
