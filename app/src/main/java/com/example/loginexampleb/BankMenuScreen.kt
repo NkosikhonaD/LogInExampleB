@@ -28,19 +28,25 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.loginexampleb.BankItemViewModel.BankItemViewModel
 import com.example.loginexampleb.model.BankItem
 
+
+/**
+ * This Kotlin file is a bank menu composable.
+ */
+
 @Composable
-fun BankMainScreen(bankViewModel: BankItemViewModel= viewModel())
+fun BankMainScreen(bankViewModel: BankItemViewModel= viewModel(),navController: NavController)
 {
     val bankItemsState by bankViewModel.bankItemList.collectAsState()
 
-    BankMenuLayOut(bankViewModel)
+    BankMenuLayOut(bankViewModel,navController=navController)
 
 }
 @Composable
-fun BankMenuLayOut(bankItemViewModel: BankItemViewModel= viewModel(), modifier : Modifier=Modifier)
+fun BankMenuLayOut(bankItemViewModel: BankItemViewModel= viewModel(), modifier : Modifier=Modifier,navController: NavController)
 {
     val bankingItemsState by bankItemViewModel.bankItemList.collectAsState()
     Column(modifier= modifier
@@ -51,7 +57,7 @@ fun BankMenuLayOut(bankItemViewModel: BankItemViewModel= viewModel(), modifier :
         Spacer(modifier = Modifier.height(60.dp))
         LazyVerticalGrid(columns = GridCells.Fixed(2)) {
             itemsIndexed(bankingItemsState){
-                    index, item -> CreateBankItemCard(bankingItems = bankingItemsState , itemIndex = index)
+                    index, item -> CreateBankItemCard(bankingItems = bankingItemsState , itemIndex = index, navController = navController)
             }
 
         }
@@ -72,23 +78,22 @@ fun BankMenuLayOut(bankItemViewModel: BankItemViewModel= viewModel(), modifier :
 
 }
 @Composable
-fun CreateBankItemCard(modifier: Modifier= Modifier, bankingItems: List<BankItem>, itemIndex:Int)
+fun CreateBankItemCard(modifier: Modifier= Modifier, bankingItems: List<BankItem>, itemIndex:Int,navController: NavController)
 {
     //val bankItems = rememberSaveable{
     //bankViewModel.getMyList()
     //}
+    val bankItemName =bankingItems[itemIndex!!].name
+    val bankItemImage = bankingItems[itemIndex!!].image
     val context = LocalContext.current
     Card(modifier = modifier
         .width(50.dp)
         .padding(10.dp)
         .clickable {
-            Toast
-                .makeText(
-                    context,
-                    "Banking Menu item ${bankingItems[itemIndex].name} clicked",
-                    Toast.LENGTH_SHORT
-                )
-                .show()
+           if(bankItemName.equals("Transfare"))
+           {
+               navController.navigate("TransfareScreen")
+           }
         },
         shape = CardDefaults.elevatedShape
     )
@@ -96,10 +101,11 @@ fun CreateBankItemCard(modifier: Modifier= Modifier, bankingItems: List<BankItem
         Column(modifier= modifier
             .fillMaxSize(1f)
             .padding(5.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-            Image(painter = painterResource(id = bankingItems[itemIndex!!].image), contentDescription ="Icon for $bankingItems[itemIndex!!].name")
-            Text(text =bankingItems[itemIndex!!].name, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            Image(painter = painterResource(id = bankItemImage), contentDescription ="Icon for $bankItemName")
+            Text(text =bankItemName, fontSize = 20.sp, fontWeight = FontWeight.Bold)
 
         }
     }
 
 }
+

@@ -19,5 +19,4 @@ data class BankAccount(val balance: Double,val transactions:List<String>)
         {
             field = value
         }
-
 }

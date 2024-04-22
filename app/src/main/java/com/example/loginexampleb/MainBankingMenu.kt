@@ -1,5 +1,6 @@
 package com.example.loginexampleb
 
+import TransfareScreen
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -39,6 +40,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.loginexampleb.BankItemViewModel.BankItemViewModel
 import com.example.loginexampleb.model.BankItem
 import com.example.loginexampleb.ui.theme.LogInExampleBTheme
@@ -66,18 +71,22 @@ class MainBankingMenu : ComponentActivity() {
 
                 )
                 {
-                   // val bankItem1 = BankItem(name="Transfare", image = R.drawable.transact_24)
-                   // val bankItem2 = BankItem(name="Save", image = R.drawable.savings_24)
-                   // val bankItem3 = BankItem(name="Cards", image = R.drawable.cards_24)
-                  //  val bankItem4 = BankItem(name="Fraud", image = R.drawable.reportfraud_24)
-                  //  val bankItem5 = BankItem(name="Contact", image = R.drawable.email_24)
-                  //  val bankItem6= BankItem(name="Petrol card", image = R.drawable.petrolcard_24)
+                    val navController = rememberNavController()
 
-                  //  var bankItemsList by remember { mutableStateOf(listOf<BankItem>(bankItem1,bankItem2,bankItem3,bankItem4,bankItem5,bankItem6))
-                   // }
-                    //var bankingItems = bankItemviewModel.bankItemList
-                    //MainMenuLazyGridScreen(bankingItems = bankItemsList)
-                    BankMainScreen()
+                    NavHost(navController = navController, startDestination ="BankScreen" )
+                    {
+
+                        composable(route="BankScreen")
+                        {
+                            BankMainScreen(navController=navController)
+                        }
+                        composable(route="TransfareScreen")
+                        {
+                            TransfareScreen()
+                        }
+                    }
+
+
                     Spacer(modifier = Modifier.height(10.dp))
 
 
@@ -92,7 +101,7 @@ class MainBankingMenu : ComponentActivity() {
 }
 
 @Composable
-fun MainMenuLazyGridScreen(modifier:Modifier = Modifier,bankingItems: List<BankItem>)
+fun MainMenuLazyGridScreen(modifier:Modifier = Modifier,bankingItems: List<BankItem>,navController: NavController)
 {
     //var bankingItems =
      //   bankViewModel.getMyList()
@@ -106,7 +115,7 @@ fun MainMenuLazyGridScreen(modifier:Modifier = Modifier,bankingItems: List<BankI
         Spacer(modifier = Modifier.height(60.dp))
         LazyVerticalGrid(columns = GridCells.Fixed(2)) {
             itemsIndexed(bankingItems){
-                    index, item -> CreateBankItemCard(bankingItems = bankingItems , itemIndex = index)
+                    index, item -> CreateBankItemCard(bankingItems = bankingItems , itemIndex = index, navController = navController)
             }
 
         }
@@ -132,6 +141,7 @@ fun addBankItem(list: List<BankItem>,name: String, image: Int)
     list+item
     //bankViewModel.addBankItem(name,image)
 }
+/**
 @Composable
 fun CreateBankItemCard(modifier: Modifier= Modifier, bankingItems: MutableList<BankItem>, itemIndex:Int)
 {
@@ -163,7 +173,8 @@ fun CreateBankItemCard(modifier: Modifier= Modifier, bankingItems: MutableList<B
         }
     }
 
-}
+}*/
+
 @Composable
 fun Greeting2(name: String, modifier: Modifier = Modifier) {
     Text(
@@ -186,6 +197,7 @@ fun GreetingPreview2() {
         var bankItemsList by remember {
             mutableStateOf(listOf<BankItem>(bankItem1,bankItem2,bankItem3,bankItem4,bankItem5,bankItem6))
         }
-        MainMenuLazyGridScreen(bankingItems = bankItemsList)
+        MainMenuLazyGridScreen(bankingItems = bankItemsList, navController = NavController(
+            LocalContext.current))
     }
 }
