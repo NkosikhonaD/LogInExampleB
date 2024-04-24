@@ -2,20 +2,31 @@ package com.example.loginexampleb
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -25,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -53,7 +65,7 @@ fun BankMenuLayOut(bankItemViewModel: BankItemViewModel= viewModel(), modifier :
         .padding(5.dp)
         .fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
 
-        Image(painter = painterResource(id = R.drawable.captainslogo), contentDescription ="Bank logo" )
+        Image(painter = painterResource(id = R.drawable.captainslogo), contentDescription ="Bank logo",modifier = modifier.size(200.dp) )
         Spacer(modifier = Modifier.height(60.dp))
         LazyVerticalGrid(columns = GridCells.Fixed(2)) {
             itemsIndexed(bankingItemsState){
@@ -61,16 +73,28 @@ fun BankMenuLayOut(bankItemViewModel: BankItemViewModel= viewModel(), modifier :
             }
 
         }
-        FloatingActionButton(onClick = {
-            val image = R.drawable.cancel_card_24
-            val name = "Cancel card"
-            bankItemViewModel.addBankItem(BankItem(image=image,name=name))
+        Spacer(modifier = modifier.height(40.dp))
 
-        })
-        {
-            Text(text = "AddItem")
+       Row (horizontalArrangement = Arrangement.End,modifier = modifier.fillMaxWidth().padding(16.dp)) {
 
-        }
+           FloatingActionButton(
+               shape = CircleShape,
+               containerColor = MaterialTheme.colorScheme.onPrimaryContainer,
+               contentColor = MaterialTheme.colorScheme.inversePrimary,
+               onClick = {
+                   val image = R.drawable.cancel_card_24
+                   val name = "Cancel card"
+                   bankItemViewModel.addBankItem(BankItem(image=image,name=name))
+
+               })
+           {
+
+               Icon(Icons.Filled.Add,"add item")
+               //Text(text = "AddItem")
+
+           }
+       }
+
 
 
 
@@ -90,10 +114,9 @@ fun CreateBankItemCard(modifier: Modifier= Modifier, bankingItems: List<BankItem
         .width(50.dp)
         .padding(10.dp)
         .clickable {
-           if(bankItemName.equals("Transfare"))
-           {
-               navController.navigate("TransfareScreen")
-           }
+            if (bankItemName.equals("Transfare")) {
+                navController.navigate("TransfareScreen")
+            }
         },
         shape = CardDefaults.elevatedShape
     )
@@ -106,6 +129,14 @@ fun CreateBankItemCard(modifier: Modifier= Modifier, bankingItems: List<BankItem
 
         }
     }
+
+}
+
+@Preview(showBackground = true)
+@Composable
+fun BankMainScreenPreview() {
+
+    BankMainScreen(navController = NavController(LocalContext.current))
 
 }
 
